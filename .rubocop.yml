@@ -1,0 +1,68 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.5
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+    - '**/*.rb'
+  Exclude:
+    - 'db/**/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'script/**/*'
+    - 'vendor/**/*'
+    - 'config/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/
+    - 'bin/**/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'spec/rspec_api_documentation_helper.rb'
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: indented_internal_methods
+Layout/LineLength:
+  Max: 88
+  IgnoredPatterns: ['\A#']
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining
+Style/WordArray:
+  EnforcedStyle: brackets
+Style/SymbolArray:
+  EnforcedStyle: brackets
+Style/RegexpLiteral:
+  EnforcedStyle: slashes
+  AllowInnerSlashes: true
+Style/RescueModifier:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+Metrics/ClassLength:
+  Max: 250
+Metrics/ModuleLength:
+  Max: 250
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'lib/tasks/*'
+Style/Encoding:
+  Enabled: false
+
+# Offense count: 175
+Metrics/AbcSize:
+  Max: 40
+
+# Offense count: 202
+# Configuration parameters: CountComments.
+Metrics/MethodLength:
+  Max: 36
+
+Layout/HashAlignment:
+  Enabled: false
+Lint/MissingSuper:
+  Enabled: false
