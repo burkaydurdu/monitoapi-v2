@@ -29,6 +29,8 @@ gem "pact"
 gem "pundit"
 # For soft deletion
 gem "paranoia"
+# Make http fun again!
+gem "httparty"
 
 group :development do
   gem "listen", "~> 3.3"
