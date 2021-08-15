@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class V1::UsersController < V1::ApplicationController
+  skip_before_action :check_authentication_token,
+                     only: :register
+
   # api :POST, "/register", "Register endpoint for user"
   # formats ["json"]
   # param :email, String,

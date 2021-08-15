@@ -18,5 +18,12 @@
 #  index_users_on_email  (email) UNIQUE
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :surname, :email
+  attributes :id, :name, :surname, :email, :token
+
+  # Return the authentication token with serialized user.
+  #
+  # @return [String] Authentication token
+  def token
+    @options[:token]
+  end
 end

@@ -21,6 +21,10 @@ class User < ApplicationRecord
   acts_as_paranoid
   has_secure_password
 
+  #
+  # One to many between user and auth tokens.
+  has_many :auth_tokens, dependent: :destroy
+
   validates :password, format: { with: Regexmn::PASSWORD_FORMAT,
                                  if: :password_digest_changed? }
 
@@ -35,4 +39,27 @@ class User < ApplicationRecord
   validates :email,
             format: { with: Regexmn::EMAIL_FORMAT,
                       on: :create }
+
+  # Authenticate user by token.
+  #
+  # @param [String] id UUID of user
+  # @param [String] token Authentication token
+  #
+  # @return [User] User
+  def self.authenticate_by_token(id, token)
+    user = User.find_by(id: id)
+    token = AuthToken.find_by(token: token)
+
+    # return user if valid, else nil
+    return user if token && user && token.user_id == user.id
+
+    nil
+  end
+
+  def generate_token!
+    token = AuthToken.generate
+    auth_tokens.create(token: token)
+
+    token
+  end
 end
