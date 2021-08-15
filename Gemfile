@@ -23,7 +23,8 @@ gem "foreman"
 gem 'health_check'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem "rack-cors"
-
+# gem 'pact-consumer-minitest' for minitest
+gem "pact"
 # Authorizations
 gem "pundit"
 # For soft deletion
@@ -46,6 +47,7 @@ group :development, :test do
   gem "faker"
   gem "pry-byebug"
   gem "rspec-rails"
+  gem "rspec_api_documentation"
   gem "webmock"
   gem "shoulda-matchers"
   gem "brakeman" # Static analysis tool for security vulnerabilities
