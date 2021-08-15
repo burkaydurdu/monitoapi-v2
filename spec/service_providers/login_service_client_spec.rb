@@ -4,29 +4,27 @@ require "rails_helper"
 require_relative "pact_helper"
 require "httparty"
 
-class RegisterServiceClient
+class LoginServiceClient
   include HTTParty
   base_uri "http://monito.com"
 
-  def register(body, headers)
+  def login(body, headers)
     JSON.parse(
-      self.class.post("/v1/register", headers: headers, body: body.to_json).body,
+      self.class.post("/v1/login", headers: headers, body: body.to_json).body,
       symbolize_names: true
     )
   end
 end
 
-RSpec.describe RegisterServiceClient, pact: true do
+RSpec.describe LoginServiceClient, pact: true do
   before do
-    RegisterServiceClient.base_uri "localhost:1234"
+    LoginServiceClient.base_uri "localhost:1234"
   end
 
-  subject { RegisterServiceClient.new }
+  subject { LoginServiceClient.new }
 
   let(:request_body) do
     {
-      name: "Burkay",
-      surname: "Durdu",
       email: "burkaydurdu@outlook",
       password: "Burkay.67"
     }
@@ -37,7 +35,8 @@ RSpec.describe RegisterServiceClient, pact: true do
       id: "1234-4545-54545-54545-2332",
       name: "Burkay",
       surname: "Durdu",
-      email: "burkaydurdu@outlook"
+      email: "burkaydurdu@outlook",
+      token: "xxx-111asdaskifdjfdsf"
     }
   end
 
@@ -45,13 +44,13 @@ RSpec.describe RegisterServiceClient, pact: true do
     { "Content-Type" => "application/json; charset=utf-8" }
   end
 
-  describe "post register service" do
+  describe "post login service" do
     before do
       monito.given("Success")
-            .upon_receiving("Create a new user.")
+            .upon_receiving("Check a user.")
             .with(
               method: "POST",
-              path: "/v1/register",
+              path: "/v1/login",
               headers: headers,
               body: request_body
             )
@@ -63,7 +62,7 @@ RSpec.describe RegisterServiceClient, pact: true do
     end
 
     it "responds with things" do
-      expect(subject.register(request_body, headers)).to eq(response_body)
+      expect(subject.login(request_body, headers)).to eq(response_body)
     end
   end
 end

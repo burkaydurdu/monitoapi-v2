@@ -7,6 +7,34 @@
   },
   "interactions": [
     {
+      "description": "Check a user.",
+      "providerState": "Success",
+      "request": {
+        "method": "POST",
+        "path": "/v1/login",
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "email": "burkaydurdu@outlook",
+          "password": "Burkay.67"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "id": "1234-4545-54545-54545-2332",
+          "name": "Burkay",
+          "surname": "Durdu",
+          "email": "burkaydurdu@outlook",
+          "token": "xxx-111asdaskifdjfdsf"
+        }
+      }
+    },
+    {
       "description": "Create a new user.",
       "providerState": "Success",
       "request": {
