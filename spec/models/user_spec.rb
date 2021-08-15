@@ -3,10 +3,15 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  let(:email) { "monito@example.com" }
+  let(:name)     { "Monito" }
+  let(:surname)  { "Monito" }
+  let(:email)    { "monito@example.com" }
   let(:password) { "Test.234" }
   let!(:user) do
-    FactoryBot.create(:user, email: email, password: password,
+    FactoryBot.create(:user, name: name,
+                             surname: surname,
+                             email: email,
+                             password: password,
                              password_confirmation: password)
   end
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe "V1::Users", type: :request do
@@ -25,7 +26,7 @@ RSpec.describe "V1::Users", type: :request do
                                      surname: Faker::Name.last_name,
                                      password: "Test.234" }
 
-      expect(response).to have_http_status(:bad_request)
+      expect(response).to have_http_status(:conflict)
     end
 
     it "should return bad request if there are missing parameters" do
