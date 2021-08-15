@@ -16,10 +16,9 @@
 #
 #  index_todos_on_user_id  (user_id)
 #
-FactoryBot.define do
-  factory :todo do
-    association :user
-    content     { Faker::Lorem.sentence }
-    done        { Faker::Boolean.boolean }
-  end
+class Todo < ApplicationRecord
+  acts_as_paranoid
+  #
+  # Many to one between todos and users.
+  belongs_to :user
 end

@@ -4,5 +4,7 @@ Rails.application.routes.draw do
     post "register/" => "users#register"
     post "login/" => "logistrations#login"
     post "logout/" => "logistrations#logout"
+
+    resources :todos
   end
 end

@@ -24,6 +24,9 @@ class User < ApplicationRecord
   #
   # One to many between user and auth tokens.
   has_many :auth_tokens, dependent: :destroy
+  #
+  # One to many between user todos.
+  has_many :todos, dependent: :destroy
 
   validates :password, format: { with: Regexmn::PASSWORD_FORMAT,
                                  if: :password_digest_changed? }
