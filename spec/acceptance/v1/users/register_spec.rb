@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require "rspec_api_documentation/dsl"
 
-RSpec.resource "User" do
+resource "Users" do
   explanation "User Register."
 
   post "/v1/register" do
@@ -14,17 +15,21 @@ RSpec.resource "User" do
               required: true
     parameter :password, "User password",
               required: true
+
     let(:name)     { "Burkay" }
     let(:surname)  { "Durdu" }
-    let(:email)    { "burkaydurdu@outlook.com" }
+    let(:email)    { "burkay12312.durdu@outlook.com" }
     let(:password) { "Test!123" }
 
-    example "POST /v1/register", document: [:private] do
+    example "POST /v1/register", document: [:v1] do
       explanation "To be able to register a user."
 
       do_request
+
+      response = JSON.parse response_body
+
       expect(response_status).to eq 200
-      expect(result["name"]).to eq name
+      expect(response["name"]).to eq name
     end
   end
 end

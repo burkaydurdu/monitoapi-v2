@@ -5,7 +5,7 @@ jobs:
       - image: circleci/ruby:2.5.8
         environment:
           PGHOST: 127.0.0.1
-          PGUSER: monitoapi-v2-test
+          PGUSER: monitoapi_v2_test
           RACK_ENV: test
           RAILS_ENV: test
           BUNDLER_VERSION: 2.0.1
@@ -14,8 +14,8 @@ jobs:
         environment:
           RACK_ENV: test
           RAILS_ENV: test
-          POSTGRES_USER: monitoapi-v2-test
-          POSTGRES_DB: monitoapi-v2_test
+          POSTGRES_USER: monitoapi_v2_test
+          POSTGRES_DB: monitoapi_v2_test
           POSTGRES_PASSWORD: ""
 
     steps:
@@ -23,11 +23,11 @@ jobs:
 
       # build
       - type: cache-restore
-        key: monitoapi-{{ checksum "Gemfile.lock" }}
+        key: monitoapi_v2-{{ checksum "Gemfile.lock" }}
       - run: gem install bundler
       - run: bundle install --path vendor/bundle
       - type: cache-save
-        key: monitoapi-{{ checksum "Gemfile.lock" }}
+        key: monitoapi_v2-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
       - run:

@@ -26,7 +26,7 @@ RSpec.describe "V1::Users", type: :request do
                                      surname: Faker::Name.last_name,
                                      password: "Test.234" }
 
-      expect(response).to have_http_status(:conflict)
+      expect(response).to have_http_status(:bad_request)
     end
 
     it "should return bad request if there are missing parameters" do
