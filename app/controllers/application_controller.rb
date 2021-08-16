@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  # Finders (validate_model)
+  include Finders
   # Finders raise ActiveRecord::RecordNotFound if not found
   rescue_from ActiveRecord::RecordNotFound do |e|
     render_error(AppError::NOT_FOUND, "#{e.model.downcase}_id" => e.id)
