@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoapi-deployment
+  labels:
+    app: monitoapi
+    tier: app
+spec:
+  replicas: 2
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: monitoapi
+      tier: app
+  template:
+    metadata:
+      labels:
+        app: monitoapi
+        tier: app
+    spec:
+      imagePullSecrets:
+        - name: docker-registry
+      containers:
+      - name: monitoapi
+        image: gcr.io/midyear-lattice-321920/monitoapi_api
+        imagePullPolicy: Always
+        command: ["/bin/sh"]
+        args: ["-c", "api-entrypoint.sh"]
+        ports:
+        - containerPort: 3000
+        env:
+        - name: RAILS_LOG_TO_STDOUT
+          value: 'true'
+        - name: SECRET_KEY_BASE
+          value: '$SECRET_KEY_BASE'
+        - name: RAILS_ENV
+          value: '$RAILS_ENV'
+        - name: DATABASE_USERNAME
+          value: '$DATABASE_USERNAME'
+        - name: DATABASE_PASSWORD
+          value: '$DATABASE_PASSWORD'
+        - name: DATABASE_HOST
+          value: '$DATABASE_HOST'
+        - name: DATABASE_PORT
+          value: '$DATABASE_PORT'
